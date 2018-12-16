@@ -1,4 +1,4 @@
-package htw.dao;
+package htw.dao.model;
 
 import java.io.Serializable;
 
