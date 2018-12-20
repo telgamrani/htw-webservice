@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import htw.common.error.ErrorMessage;
+import htw.common.exception.ResourceNotFoundException;
 import htw.dao.model.Look;
 import htw.dao.model.json.LookJson;
 import htw.service.LookService;
@@ -28,27 +30,29 @@ public class LookController {
 	private LookService lookService;
 	
 	@PostMapping(value = "/add")
-	public boolean add(@Valid @RequestBody AddLookRequest addLookRequest) {
+	public LookJson add(@Valid @RequestBody AddLookRequest addLookRequest) {
 		LookJson lookJson = addLookRequest.getLook();
-		lookService.save(lookJson.convertToDao());
-		return true;
+		return lookService.save(lookJson.convertToDao()).convertToJson();
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public boolean delete(@PathVariable Long id) {
+	public void delete(@PathVariable Long id) {
 		lookService.deleteById(id);
-		return true;
 	}
 	
 	@GetMapping(value = "/get/{id}")
 	public LookJson findById(@PathVariable Long id) {
-		System.out.println("/look/getLookById");
+		
 		Optional<Look> look = lookService.findById(id);
-		LookJson lookJson = new LookJson();
-		if(look.isPresent()) {
-			lookJson = look.get().convertToJson();
+		
+		if(!look.isPresent()) {
+			throw new ResourceNotFoundException(ErrorMessage.LOOK_NOT_FOUND.concat(String.valueOf(id)));
 		}
+		
+		LookJson lookJson = look.get().convertToJson();
+		
 		return lookJson;
+		
 	}
 	
 	@GetMapping(value = "/get")
