@@ -28,6 +28,8 @@ public class Article implements Serializable{
 	
 	private Double price;
 	
+	private String description;
+	
 //	@OneToMany(
 //        mappedBy = "article",
 //        cascade = CascadeType.ALL,
@@ -37,14 +39,15 @@ public class Article implements Serializable{
 
 	
 	public Article() {}
-
-	public Article(String shoppingSiteName, String shoppingUrl, String imgUrl, Double price) {
+	
+	public Article(String shoppingSiteName, String shoppingUrl, String imgUrl, Double price, String description) {
 		this.shoppingSiteName = shoppingSiteName;
 		this.shoppingUrl = shoppingUrl;
 		this.imgUrl = imgUrl;
 		this.price = price;
+		this.description = description;
 	}
-	
+
 	public ArticleJson convertToJson() {
 		ArticleJson articleJson = new ArticleJson();
 		articleJson.setId(this.getId());
@@ -52,6 +55,7 @@ public class Article implements Serializable{
 		articleJson.setShoppingSiteName(this.getShoppingSiteName());
 		articleJson.setShoppingUrl(this.getShoppingUrl());
 		articleJson.setPrice(this.getPrice());
+		articleJson.setDescription(this.getDescription());
 		return articleJson;
 	}
 
@@ -95,6 +99,12 @@ public class Article implements Serializable{
 		this.price = price;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

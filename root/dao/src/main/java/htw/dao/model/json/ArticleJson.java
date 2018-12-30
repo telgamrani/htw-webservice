@@ -1,7 +1,6 @@
 package htw.dao.model.json;
 
-import javax.validation.constraints.NotNull;
-
+import htw.common.enums.LookArticleAssociationType;
 import htw.dao.model.Article;
 
 public class ArticleJson {
@@ -12,23 +11,33 @@ public class ArticleJson {
 	
 	private String shoppingUrl;
 	
-	@NotNull
 	private String imgUrl;
 	
+	private String imgString;
+	
 	private Double price;
+	
+	private String description;
+	
+	private LookArticleAssociationType lookArticleAssociationType;
+	
+	private int rank;
 
 	
 	public ArticleJson() {}
 
-
-	public ArticleJson(Long id, String shoppingSiteName, String shoppingUrl, String imgUrl, Double price) {
+	public ArticleJson(Long id, String shoppingSiteName, String shoppingUrl, String imgUrl, String imgString, Double price, String description) {
 		this.id = id;
 		this.shoppingSiteName = shoppingSiteName;
 		this.shoppingUrl = shoppingUrl;
 		this.imgUrl = imgUrl;
+		this.imgString = imgString;
 		this.price = price;
+		this.description = description;
 	}
-	
+
+
+
 	public Article convertToDao() {
 		Article article = new Article();
 		article.setId(this.getId());
@@ -36,9 +45,9 @@ public class ArticleJson {
 		article.setShoppingSiteName(this.getShoppingSiteName());
 		article.setShoppingUrl(this.getShoppingUrl());
 		article.setPrice(this.getPrice());
+		article.setDescription(this.getDescription());
 		return article;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -79,6 +88,13 @@ public class ArticleJson {
 		this.imgUrl = imgUrl;
 	}
 
+	public String getImgString() {
+		return imgString;
+	}
+
+	public void setImgString(String imgString) {
+		this.imgString = imgString;
+	}
 
 	public Double getPrice() {
 		return price;
@@ -89,6 +105,29 @@ public class ArticleJson {
 		this.price = price;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public LookArticleAssociationType getLookArticleAssociationType() {
+		return lookArticleAssociationType;
+	}
+
+	public void setLookArticleAssociationType(LookArticleAssociationType lookArticleAssociationType) {
+		this.lookArticleAssociationType = lookArticleAssociationType;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 
 	@Override
 	public int hashCode() {

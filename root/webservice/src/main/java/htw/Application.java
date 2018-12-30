@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import htw.common.enums.LookArticleAssociationType;
 import htw.dao.model.Article;
 import htw.dao.model.Look;
 import htw.service.LookService;
@@ -27,11 +28,11 @@ public class Application {
     public void testLookArticleAssociation() {
     	
     	System.out.println("start");
-    	Article article1 = new Article("shoppingSiteName1", "shoppingUrl1", "imgUrl1", 1.0);
-    	Article article2 = new Article("shoppingSiteName2", "shoppingUrl2", "imgUrl2", 2.0);
+    	Article article1 = new Article("shoppingSiteName1", "shoppingUrl1", "imgUrl1", 1.0, "desc");
+    	Article article2 = new Article("shoppingSiteName2", "shoppingUrl2", "imgUrl2", 2.0, "desc");
     	Look look = new Look("lookImgUrl");
-    	look.addArticle(article1);
-    	look.addArticle(article2);
+    	look.addArticle(article1, LookArticleAssociationType.PRINCIPAL, 1);
+    	look.addArticle(article2, LookArticleAssociationType.SECONDARY, 1);
     	lookService.save(look);
     	System.out.println("ok");
     	

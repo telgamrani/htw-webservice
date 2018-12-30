@@ -32,7 +32,10 @@ public class LookController {
 	@PostMapping(value = "/add")
 	public LookJson add(@Valid @RequestBody AddLookRequest addLookRequest) {
 		LookJson lookJson = addLookRequest.getLook();
-		return lookService.save(lookJson.convertToDao()).convertToJson();
+		Look look = lookService.save(lookJson.convertToDao());
+		look.setImgUrl(String.valueOf(look.getId()));
+		lookService.save(look);
+		return look.convertToJson();
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")

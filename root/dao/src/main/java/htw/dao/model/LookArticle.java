@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import htw.common.enums.LookArticleAssociation;
+import htw.common.enums.LookArticleAssociationType;
 
 @Entity
 @Table(name = "look_article")
@@ -31,7 +31,7 @@ public class LookArticle implements Serializable {
 	private Article article;
 	
 	@Enumerated(EnumType.STRING)
-	private LookArticleAssociation type;
+	private LookArticleAssociationType lookArticleAssociationType;
 	
 	private int rank;
 	
@@ -40,6 +40,14 @@ public class LookArticle implements Serializable {
 	public LookArticle(Look look, Article article) {
 		this.look = look;
 		this.article = article;
+		this.id = new LookArticleId(look.getId(), article.getId());
+	}
+
+	public LookArticle(Look look, Article article, LookArticleAssociationType lookArticleAssociationType, int rank) {
+		this.look = look;
+		this.article = article;
+		this.lookArticleAssociationType = lookArticleAssociationType;
+		this.rank = rank;
 		this.id = new LookArticleId(look.getId(), article.getId());
 	}
 
@@ -67,12 +75,12 @@ public class LookArticle implements Serializable {
 		this.article = article;
 	}
 
-	public LookArticleAssociation getType() {
-		return type;
+	public LookArticleAssociationType getLookArticleAssociationType() {
+		return lookArticleAssociationType;
 	}
 
-	public void setType(LookArticleAssociation type) {
-		this.type = type;
+	public void setLookArticleAssociationType(LookArticleAssociationType lookArticleAssociationType) {
+		this.lookArticleAssociationType = lookArticleAssociationType;
 	}
 
 	public int getRank() {
@@ -88,8 +96,8 @@ public class LookArticle implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lookArticleAssociationType == null) ? 0 : lookArticleAssociationType.hashCode());
 		result = prime * result + rank;
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -107,9 +115,9 @@ public class LookArticle implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (rank != other.rank)
+		if (lookArticleAssociationType != other.lookArticleAssociationType)
 			return false;
-		if (type != other.type)
+		if (rank != other.rank)
 			return false;
 		return true;
 	}

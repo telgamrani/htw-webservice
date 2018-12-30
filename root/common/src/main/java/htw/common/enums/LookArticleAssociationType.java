@@ -1,5 +1,5 @@
 package htw.common.enums;
 
-public enum LookArticleAssociation {
+public enum LookArticleAssociationType {
 	PRINCIPAL, SECONDARY
 }

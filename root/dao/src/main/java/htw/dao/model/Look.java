@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import htw.common.enums.LookArticleAssociationType;
 import htw.dao.model.json.LookJson;
 
 @Entity
@@ -75,8 +76,8 @@ public class Look implements Serializable {
 		this.lookArticles.add(lookArticle);
 	}
 	
-	public void addArticle(Article article) {
-		LookArticle lookArticle = new LookArticle(this, article);
+	public void addArticle(Article article, LookArticleAssociationType lookArticleAssociationType, int rank) {
+		LookArticle lookArticle = new LookArticle(this, article, lookArticleAssociationType, rank);
 		this.addLookArticles(lookArticle);
 	}
 	
