@@ -1,8 +1,5 @@
 package htw.controller;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,11 +37,14 @@ public class LookController {
 	
 	@PostMapping(value = "/add")
 	public LookJson add(@Valid @RequestBody AddLookRequest addLookRequest, HttpServletRequest request) {
+		
 		LookJson lookJson = addLookRequest.getLook();
 		Look look = lookService.save(lookJson.convertToDao());
+		
 		String fileExtension = Base64Util.getExtension(lookJson.getImgString());
 		look.setImgUrl(String.valueOf(look.getId()+"."+fileExtension));
 		lookService.save(look);
+		
 		lookService.saveLookImgOnDisk(look);
 		articleService.saveArticlesImgsOnDisk(look.getArticles());
 		
