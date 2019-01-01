@@ -6,5 +6,5 @@ import htw.dao.model.Article;
 
 public interface ArticleService {
 
-	void saveArticlesImgs(List<Article> articles);
+	void saveArticlesImgsOnDisk(List<Article> articles);
 }

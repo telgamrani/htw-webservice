@@ -10,8 +10,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import htw.common.error.ErrorMessage;
 import htw.common.exception.ResourceNotFoundException;
 import htw.common.utils.Base64Util;
-import htw.common.utils.FileUtil;
 import htw.dao.model.Look;
 import htw.dao.model.json.LookJson;
 import htw.service.ArticleService;
@@ -47,8 +46,8 @@ public class LookController {
 		String fileExtension = Base64Util.getExtension(lookJson.getImgString());
 		look.setImgUrl(String.valueOf(look.getId()+"."+fileExtension));
 		lookService.save(look);
-		lookService.saveLookImg(look);
-		articleService.saveArticlesImgs(look.getArticles());
+		lookService.saveLookImgOnDisk(look);
+		articleService.saveArticlesImgsOnDisk(look.getArticles());
 		
 		return look.convertToJson();
 	}

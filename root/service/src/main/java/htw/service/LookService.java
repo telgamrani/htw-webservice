@@ -16,5 +16,5 @@ public interface LookService {
 	
 	Optional<Look> findById(Long id);
 	
-	boolean saveLookImg(Look look);
+	boolean saveLookImgOnDisk(Look look);
 }

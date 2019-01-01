@@ -2,6 +2,7 @@ package htw.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import htw.common.enums.FileDirectory;
@@ -13,13 +14,17 @@ import htw.service.ArticleService;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
+	@Value("${image.storageRoot}")
+	private String imageStorageRoot;
+	
 	@Override
-	public void saveArticlesImgs(List<Article> articles) {
+	public void saveArticlesImgsOnDisk(List<Article> articles) {
 		if (articles != null) {
 			articles.forEach( a -> {
 				String fileExtension = Base64Util.getExtension(a.getImgString());
+				String storagePath = imageStorageRoot.concat(FileDirectory.IMAGES.getValue()+"/"+FileDirectory.ARTICLES.getValue());
 				FileUtil.saveFile(a.getImgString(), 
-								  FileDirectory.IMAGES.getValue()+"/"+FileDirectory.ARTICLES.getValue(), 
+								  storagePath, 
 								  String.valueOf(a.getId()), 
 								  fileExtension);
 			});

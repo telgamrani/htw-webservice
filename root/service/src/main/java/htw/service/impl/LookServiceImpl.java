@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import htw.common.enums.FileDirectory;
 import htw.common.utils.Base64Util;
 import htw.common.utils.FileUtil;
 import htw.dao.model.Look;
-import htw.dao.model.json.LookJson;
 import htw.dao.repository.LookRepository;
 import htw.service.LookService;
 
@@ -19,6 +19,9 @@ public class LookServiceImpl implements LookService {
 
 	@Autowired
 	private LookRepository lookRepository;
+	
+	@Value("${image.storageRoot}")
+	private String imageStorageRoot;
 
 	public Look save(Look look) {
 		return lookRepository.save(look);
@@ -40,10 +43,11 @@ public class LookServiceImpl implements LookService {
 	}
 
 	@Override
-	public boolean saveLookImg(Look look) {
+	public boolean saveLookImgOnDisk(Look look) {
 		String fileExtension = Base64Util.getExtension(look.getImgString());
+		String storagePath = imageStorageRoot.concat(FileDirectory.IMAGES.getValue()+"/"+FileDirectory.LOOKS.getValue());
 		return FileUtil.saveFile(look.getImgString(), 
-								 FileDirectory.IMAGES.getValue()+"/"+FileDirectory.LOOKS.getValue(), 
+								 storagePath, 
 								 String.valueOf(look.getId()), 
 								 fileExtension);
 	}
