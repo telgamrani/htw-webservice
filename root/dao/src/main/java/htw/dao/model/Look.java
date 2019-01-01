@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +28,10 @@ public class Look implements Serializable {
 	private Long id;
 	
 	private String imgUrl;
+	
+	@Lob
+	@Column(name = "imgString", columnDefinition = "LONGTEXT")
+	private String imgString;
 	
 	@OneToMany(
 	  mappedBy = "look", 
@@ -64,12 +70,28 @@ public class Look implements Serializable {
 		this.imgUrl = imgUrl;
 	}
 
+	public String getImgString() {
+		return imgString;
+	}
+
+	public void setImgString(String imgString) {
+		this.imgString = imgString;
+	}
+
 	public List<LookArticle> getLookArticles() {
 		return lookArticles;
 	}
 
 	public void setLookArticles(List<LookArticle> lookArticles) {
 		this.lookArticles = lookArticles;
+	}
+	
+	public List<Article> getArticles(){
+		List<Article> articles = new ArrayList<Article>();
+		if(this.getLookArticles() != null) {
+			this.getLookArticles().forEach(la -> articles.add(la.getArticle()));
+		}
+		return articles;
 	}
 	
 	public void addLookArticles(LookArticle lookArticle) {

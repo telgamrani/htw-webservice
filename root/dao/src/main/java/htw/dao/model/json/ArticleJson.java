@@ -42,6 +42,7 @@ public class ArticleJson {
 		Article article = new Article();
 		article.setId(this.getId());
 		article.setImgUrl(this.getImgUrl());
+		article.setImgString(this.getImgString());
 		article.setShoppingSiteName(this.getShoppingSiteName());
 		article.setShoppingUrl(this.getShoppingUrl());
 		article.setPrice(this.getPrice());

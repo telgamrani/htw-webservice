@@ -42,6 +42,7 @@ public class LookJson implements Serializable {
 		Look look = new Look();
 		look.setId(this.getId());
 		look.setImgUrl(this.getImgUrl());
+		look.setImgString(this.getImgString());
 		articles.forEach(a -> look.addArticle(a.convertToDao(), a.getLookArticleAssociationType(), a.getRank()));
 		return look;
 	}

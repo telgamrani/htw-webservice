@@ -2,10 +2,12 @@ package htw.dao.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import htw.dao.model.json.ArticleJson;
@@ -25,6 +27,10 @@ public class Article implements Serializable{
 	private String shoppingUrl;
 	
 	private String imgUrl;
+	
+	@Lob
+	@Column(name = "imgString", columnDefinition = "LONGTEXT")
+	private String imgString;
 	
 	private Double price;
 	
@@ -89,6 +95,14 @@ public class Article implements Serializable{
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public String getImgString() {
+		return imgString;
+	}
+
+	public void setImgString(String imgString) {
+		this.imgString = imgString;
 	}
 
 	public Double getPrice() {

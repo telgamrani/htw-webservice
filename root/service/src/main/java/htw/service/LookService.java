@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import htw.dao.model.Look;
+import htw.dao.model.json.LookJson;
 
 public interface LookService {
 	
@@ -14,4 +15,6 @@ public interface LookService {
 	List<Look> findAll();
 	
 	Optional<Look> findById(Long id);
+	
+	boolean saveLookImg(Look look);
 }
