@@ -14,6 +14,8 @@ public interface LookService {
 	
 	List<Look> findAll();
 	
+	List<Look> findAll(int page, int size);
+	
 	Optional<Look> findById(Long id);
 	
 	boolean saveLookImgOnDisk(Look look);

@@ -53,6 +53,14 @@ public class Article implements Serializable{
 		this.price = price;
 		this.description = description;
 	}
+	
+	public Article(Article article) {
+		this.shoppingSiteName = article.getShoppingSiteName();
+		this.shoppingUrl = article.getShoppingUrl();
+		this.imgUrl = article.getImgUrl();
+		this.price = article.getPrice();
+		this.description = article.getDescription();
+	}
 
 	public ArticleJson convertToJson() {
 		ArticleJson articleJson = new ArticleJson();

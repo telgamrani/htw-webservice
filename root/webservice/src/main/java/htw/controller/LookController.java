@@ -78,4 +78,12 @@ public class LookController {
 		looks.forEach(l -> looksJson.add(l.convertToJson()));
 		return looksJson;
 	}
+	
+	@GetMapping(value = "/get/{page}/{size}")
+	public List<LookJson> findAll(@PathVariable int page, @PathVariable int size){
+		List<Look> looks = lookService.findAll(page, size);
+		List<LookJson> looksJson = new ArrayList<>();
+		looks.forEach(l -> looksJson.add(l.convertToJson()));
+		return looksJson;
+	}
 }
