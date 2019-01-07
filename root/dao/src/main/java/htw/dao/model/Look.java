@@ -33,6 +33,8 @@ public class Look implements Serializable {
 	@Column(name = "imgString", columnDefinition = "LONGTEXT")
 	private String imgString;
 	
+	private boolean isPublished = false;
+	
 	@OneToMany(
 	  mappedBy = "look", 
 	  cascade = CascadeType.ALL, 
@@ -50,7 +52,8 @@ public class Look implements Serializable {
 		LookJson lookJson = new LookJson();
 		lookJson.setId(this.getId());
 		lookJson.setImgUrl(this.getImgUrl());
-		this.lookArticles.forEach(la -> lookJson.addArticle(la.getArticle().convertToJson()));
+		lookJson.setPublished(this.isPublished());
+		this.lookArticles.forEach(la -> lookJson.addArticle(la.getArticle().convertToJson(), la.getRank(), la.getLookArticleAssociationType()));
 		return lookJson;
 	}
 
@@ -76,6 +79,14 @@ public class Look implements Serializable {
 
 	public void setImgString(String imgString) {
 		this.imgString = imgString;
+	}
+
+	public boolean isPublished() {
+		return isPublished;
+	}
+
+	public void setPublished(boolean isPublished) {
+		this.isPublished = isPublished;
 	}
 
 	public List<LookArticle> getLookArticles() {

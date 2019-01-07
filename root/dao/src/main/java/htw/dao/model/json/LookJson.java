@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import htw.common.enums.LookArticleAssociationType;
 import htw.dao.model.Look;
 import htw.dao.model.json.ArticleJson; 
 
@@ -21,9 +22,17 @@ public class LookJson implements Serializable {
 	
 	private String imgString;
 	
+	private boolean isPublished;
+	
+	private LookArticleAssociationType lookArticleAssociationType;
+	
+	private int rank;
+	
 	@NotEmpty
 	@Valid
 	private List<ArticleJson> articles = new ArrayList<>();
+	
+	
 
 	public LookJson() {}
 
@@ -43,6 +52,7 @@ public class LookJson implements Serializable {
 		look.setId(this.getId());
 		look.setImgUrl(this.getImgUrl());
 		look.setImgString(this.getImgString());
+		look.setPublished(this.isPublished());
 		articles.forEach(a -> look.addArticle(a.convertToDao(), a.getLookArticleAssociationType(), a.getRank()));
 		return look;
 	}
@@ -67,6 +77,30 @@ public class LookJson implements Serializable {
 		this.imgString = imgString;
 	}
 
+	public boolean isPublished() {
+		return isPublished;
+	}
+
+	public void setPublished(boolean isPublished) {
+		this.isPublished = isPublished;
+	}
+
+	public LookArticleAssociationType getLookArticleAssociationType() {
+		return lookArticleAssociationType;
+	}
+
+	public void setLookArticleAssociationType(LookArticleAssociationType lookArticleAssociationType) {
+		this.lookArticleAssociationType = lookArticleAssociationType;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
@@ -79,7 +113,9 @@ public class LookJson implements Serializable {
 		this.articles = articles;
 	}
 	
-	public void addArticle(ArticleJson articleJson) {
+	public void addArticle(ArticleJson articleJson, int rank, LookArticleAssociationType lookArticleAssociationType) {
+		articleJson.setRank(rank);
+		articleJson.setLookArticleAssociationType(lookArticleAssociationType);
 		this.articles.add(articleJson);
 	}
 

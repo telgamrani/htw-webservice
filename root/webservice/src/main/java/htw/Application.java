@@ -28,8 +28,8 @@ public class Application {
     public void testLookArticleAssociation() {
     	
     	System.out.println("start");
-    	Article article1 = new Article("shoppingSiteName1", "shoppingUrl1", "imgUrl1", 1.0, "desc");
-    	Article article2 = new Article("shoppingSiteName2", "shoppingUrl2", "imgUrl2", 2.0, "desc");
+    	Article article1 = new Article("shoppingSiteName1", "shoppingUrl1", "brand1", "imgUrl1", 1.0, "desc");
+    	Article article2 = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", "imgUrl2", 2.0, "desc");
     	Look look = new Look("lookImgUrl");
     	look.addArticle(article1, LookArticleAssociationType.PRINCIPAL, 1);
     	look.addArticle(article2, LookArticleAssociationType.SECONDARY, 1);

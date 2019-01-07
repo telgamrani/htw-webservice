@@ -26,6 +26,8 @@ public class Article implements Serializable{
 	
 	private String shoppingUrl;
 	
+	private String brand;
+	
 	private String imgUrl;
 	
 	@Lob
@@ -46,9 +48,10 @@ public class Article implements Serializable{
 	
 	public Article() {}
 	
-	public Article(String shoppingSiteName, String shoppingUrl, String imgUrl, Double price, String description) {
+	public Article(String shoppingSiteName, String shoppingUrl, String brand, String imgUrl, Double price, String description) {
 		this.shoppingSiteName = shoppingSiteName;
 		this.shoppingUrl = shoppingUrl;
+		this.brand = brand;
 		this.imgUrl = imgUrl;
 		this.price = price;
 		this.description = description;
@@ -57,6 +60,7 @@ public class Article implements Serializable{
 	public Article(Article article) {
 		this.shoppingSiteName = article.getShoppingSiteName();
 		this.shoppingUrl = article.getShoppingUrl();
+		this.brand = article.getBrand();
 		this.imgUrl = article.getImgUrl();
 		this.price = article.getPrice();
 		this.description = article.getDescription();
@@ -68,6 +72,7 @@ public class Article implements Serializable{
 		articleJson.setImgUrl(this.getImgUrl());
 		articleJson.setShoppingSiteName(this.getShoppingSiteName());
 		articleJson.setShoppingUrl(this.getShoppingUrl());
+		articleJson.setBrand(this.getBrand());
 		articleJson.setPrice(this.getPrice());
 		articleJson.setDescription(this.getDescription());
 		return articleJson;
@@ -95,6 +100,14 @@ public class Article implements Serializable{
 
 	public void setShoppingUrl(String shoppingUrl) {
 		this.shoppingUrl = shoppingUrl;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public String getImgUrl() {

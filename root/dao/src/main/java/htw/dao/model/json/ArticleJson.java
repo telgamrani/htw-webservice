@@ -15,6 +15,8 @@ public class ArticleJson {
 	
 	private String imgString;
 	
+	private String brand;
+	
 	private Double price;
 	
 	private String description;
@@ -26,17 +28,16 @@ public class ArticleJson {
 	
 	public ArticleJson() {}
 
-	public ArticleJson(Long id, String shoppingSiteName, String shoppingUrl, String imgUrl, String imgString, Double price, String description) {
+	public ArticleJson(Long id, String shoppingSiteName, String shoppingUrl, String imgUrl, String imgString, String brand, Double price, String description) {
 		this.id = id;
 		this.shoppingSiteName = shoppingSiteName;
 		this.shoppingUrl = shoppingUrl;
 		this.imgUrl = imgUrl;
 		this.imgString = imgString;
+		this.brand = brand;
 		this.price = price;
 		this.description = description;
 	}
-
-
 
 	public Article convertToDao() {
 		Article article = new Article();
@@ -45,6 +46,7 @@ public class ArticleJson {
 		article.setImgString(this.getImgString());
 		article.setShoppingSiteName(this.getShoppingSiteName());
 		article.setShoppingUrl(this.getShoppingUrl());
+		article.setBrand(this.getBrand());
 		article.setPrice(this.getPrice());
 		article.setDescription(this.getDescription());
 		return article;
@@ -95,6 +97,14 @@ public class ArticleJson {
 
 	public void setImgString(String imgString) {
 		this.imgString = imgString;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public Double getPrice() {

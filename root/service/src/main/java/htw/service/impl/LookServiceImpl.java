@@ -5,9 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import htw.common.enums.FileDirectory;
@@ -35,14 +34,23 @@ public class LookServiceImpl implements LookService {
 		lookRepository.deleteById(id);
 	}
 	
+	private Sort sortByIdDesc() {
+        return new Sort(Sort.Direction.DESC, "id");
+    }
+	
 	@Override
 	public List<Look> findAll() {
-		return lookRepository.findAll();
+		return lookRepository.findAll(sortByIdDesc());
 	}
 	
 	@Override
 	public List<Look> findAll(int page, int size) {
-		return lookRepository.findAll(PageRequest.of(page, size)).getContent();
+		return lookRepository.findAll(PageRequest.of(page, size, sortByIdDesc())).getContent();
+	}
+
+	@Override
+	public List<Look> findByIsPublished(boolean isPublished, int page, int size) {
+		return lookRepository.findByIsPublished(isPublished, PageRequest.of(page, size, sortByIdDesc())).getContent();
 	}
 
 	@Override
@@ -58,6 +66,30 @@ public class LookServiceImpl implements LookService {
 								 storagePath, 
 								 String.valueOf(look.getId()), 
 								 fileExtension);
+	}
+	
+	@Override
+	public Look saveLookAndArticlesImgUrl(Look look) {
+		
+		// Articles
+		look.getArticles().forEach(a -> {
+			String fileArticleExtension = Base64Util.getExtension(a.getImgString());
+			a.setImgUrl(String.valueOf(a.getId()+"."+fileArticleExtension));
+		});
+		
+		// Look
+		String fileLookExtension = Base64Util.getExtension(look.getImgString());
+		look.setImgUrl(String.valueOf(look.getId()+"."+fileLookExtension));
+		
+		return lookRepository.save(look);
+	}
+
+	@Override
+	public int setPublished(boolean isPublished, Look look) {
+		if(look == null) {
+			return 0;
+		}
+		return lookRepository.setPublished(isPublished, look.getId());
 	}
 	
 }

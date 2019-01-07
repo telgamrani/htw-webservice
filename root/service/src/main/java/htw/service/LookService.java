@@ -3,8 +3,11 @@ package htw.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
+
 import htw.dao.model.Look;
-import htw.dao.model.json.LookJson;
 
 public interface LookService {
 	
@@ -14,9 +17,15 @@ public interface LookService {
 	
 	List<Look> findAll();
 	
+	List<Look> findByIsPublished(boolean isPublished, int page, int size);
+	
 	List<Look> findAll(int page, int size);
 	
 	Optional<Look> findById(Long id);
 	
 	boolean saveLookImgOnDisk(Look look);
+	
+	Look saveLookAndArticlesImgUrl(Look look);
+	
+	int setPublished(boolean isPublished, Look look);
 }
