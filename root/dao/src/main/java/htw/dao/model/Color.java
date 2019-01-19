@@ -13,27 +13,27 @@ public class Color implements Serializable {
 	private static final long serialVersionUID = 9141238373657000686L;
 	
 	@Id
-	private String color;
+	private String value;
 
 	public Color() {}
 
-	public Color(String color) {
-		this.color = color;
+	public Color(String value) {
+		this.value = value;
 	}
 
-	public String getColor() {
-		return color;
+	public String getValue() {
+		return value;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
 
@@ -46,12 +46,12 @@ public class Color implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Color other = (Color) obj;
-		if (color == null) {
-			if (other.color != null)
+		if (value == null) {
+			if (other.value != null)
 				return false;
-		} else if (!color.equals(other.color))
+		} else if (!value.equals(other.value))
 			return false;
 		return true;
 	}
-	
+
 }

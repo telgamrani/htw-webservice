@@ -18,27 +18,27 @@ public class Category implements Serializable {
 	
 	@Id	
 	@Enumerated(EnumType.STRING)
-	private ArticleCategoryType articleCategory;
+	private ArticleCategoryType value;
 
 	public Category() {}
 
-	public Category(ArticleCategoryType articleCategory) {
-		this.articleCategory = articleCategory;
+	public Category(ArticleCategoryType value) {
+		this.value = value;
 	}
 
-	public ArticleCategoryType getArticleCategory() {
-		return articleCategory;
+	public ArticleCategoryType getValue() {
+		return value;
 	}
 
-	public void setArticleCategory(ArticleCategoryType articleCategory) {
-		this.articleCategory = articleCategory;
+	public void setValue(ArticleCategoryType value) {
+		this.value = value;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((articleCategory == null) ? 0 : articleCategory.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
 
@@ -51,9 +51,9 @@ public class Category implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		if (articleCategory != other.articleCategory)
+		if (value != other.value)
 			return false;
 		return true;
-	}	
+	}
 	
 }

@@ -13,28 +13,27 @@ public class Size implements Serializable {
 	private static final long serialVersionUID = -4066059694009173211L;
 	
 	@Id
-	private String size;
+	private String value;
 
 	public Size() {}
 
-	public Size(String size) {
-		super();
-		this.size = size;
+	public Size(String value) { 
+		this.value = value;
 	}
 
-	public String getSize() {
-		return size;
+	public String getValue() {
+		return value;
 	}
 
-	public void setSize(String size) {
-		this.size = size;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((size == null) ? 0 : size.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
 
@@ -47,10 +46,10 @@ public class Size implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Size other = (Size) obj;
-		if (size == null) {
-			if (other.size != null)
+		if (value == null) {
+			if (other.value != null)
 				return false;
-		} else if (!size.equals(other.size))
+		} else if (!value.equals(other.value))
 			return false;
 		return true;
 	}

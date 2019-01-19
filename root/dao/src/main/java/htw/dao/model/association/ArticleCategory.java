@@ -37,7 +37,7 @@ public class ArticleCategory implements Serializable {
 	public ArticleCategory(Article article, Category category) {
 		this.article = article;
 		this.category = category;
-		this.id = new ArticleCategoryId(article.getId(), category.getArticleCategory());
+		this.id = new ArticleCategoryId(article.getId(), category.getValue());
 	}
 
 	public Article getArticle() {
