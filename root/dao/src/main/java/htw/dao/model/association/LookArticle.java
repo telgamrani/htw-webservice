@@ -1,4 +1,4 @@
-package htw.dao.model;
+package htw.dao.model.association;
 
 import java.io.Serializable;
 
@@ -12,6 +12,9 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import htw.common.enums.LookArticleAssociationType;
+import htw.dao.embedded.id.LookArticleId;
+import htw.dao.model.Article;
+import htw.dao.model.Look;
 
 @Entity
 @Table(name = "look_article")

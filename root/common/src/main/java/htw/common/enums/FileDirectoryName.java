@@ -1,11 +1,11 @@
 package htw.common.enums;
 
-public enum FileDirectory {
+public enum FileDirectoryName {
 	LOOKS("looks"), ARTICLES("articles"), IMAGES("images");
 	
 	private final String value;
 
-	FileDirectory(String value) {
+	FileDirectoryName(String value) {
         this.value = value;
     }
     

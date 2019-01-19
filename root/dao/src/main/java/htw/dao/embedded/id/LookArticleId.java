@@ -1,4 +1,4 @@
-package htw.dao.model;
+package htw.dao.embedded.id;
 
 import java.io.Serializable;
 
@@ -53,8 +53,5 @@ public class LookArticleId implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }

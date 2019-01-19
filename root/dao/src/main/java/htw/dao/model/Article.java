@@ -1,15 +1,23 @@
 package htw.dao.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import htw.dao.model.association.ArticleCategory;
 import htw.dao.model.json.ArticleJson;
 
 @Entity
@@ -44,7 +52,26 @@ public class Article implements Serializable{
 //        orphanRemoval = true
 //    )
 //    private List<LookArticle> looksArticle = new ArrayList<>();
-
+	
+	@OneToMany(
+			mappedBy = "article",
+			cascade = CascadeType.PERSIST
+	)
+	private List<ArticleCategory> articleCategories = new ArrayList<>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "size_id")
+	private Size size;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "color_id")
+	private Color color;
+	
+	@OneToMany(
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.PERSIST
+	)
+	private List<Image> image;
 	
 	public Article() {}
 	
@@ -137,9 +164,72 @@ public class Article implements Serializable{
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public List<ArticleCategory> getArticleCategories() {
+		return articleCategories;
+	}
+
+	public void setArticleCategories(List<ArticleCategory> articleCategories) {
+		this.articleCategories = articleCategories;
+	}
+	
+	public void addArticleCategory(ArticleCategory articleCategory) {
+		this.articleCategories.add(articleCategory);
+	}
+	
+	public void addCategory(Category category) {
+		ArticleCategory articleCategory = new ArticleCategory(this, category);
+		this.addArticleCategory(articleCategory);
+	}
+	
+//	public List<Article> getArticles(){
+//		List<Article> articles = new ArrayList<Article>();
+//		if(this.getLookArticles() != null) {
+//			this.getLookArticles().forEach(la -> articles.add(la.getArticle()));
+//		}
+//		return articles;
+//	}
+	
+	public List<Category> getCategories() {
+		List<Category> categories = new ArrayList<Category>();
+		if(this.getArticleCategories() != null) {
+			this.getArticleCategories().forEach(ac -> categories.add(ac.getCategory()));
+		}
+		return categories;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public List<Image> getImage() {
+		return image;
+	}
+
+	public void setImage(List<Image> image) {
+		this.image = image;
+	}
+	
+	public void addImage(Image image) {
+		this.image.add(image);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import htw.common.enums.LookArticleAssociationType;
+import htw.dao.model.association.LookArticle;
 import htw.dao.model.json.LookJson;
 
 @Entity

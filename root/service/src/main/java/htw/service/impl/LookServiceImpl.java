@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import htw.common.enums.FileDirectory;
+import htw.common.enums.FileDirectoryName;
 import htw.common.utils.Base64Util;
 import htw.common.utils.FileUtil;
 import htw.dao.model.Look;
@@ -61,7 +61,7 @@ public class LookServiceImpl implements LookService {
 	@Override
 	public boolean saveLookImgOnDisk(Look look) {
 		String fileExtension = Base64Util.getExtension(look.getImgString());
-		String storagePath = imageStorageRoot.concat(FileDirectory.IMAGES.getValue()+"/"+FileDirectory.LOOKS.getValue());
+		String storagePath = imageStorageRoot.concat(FileDirectoryName.IMAGES.getValue()+"/"+FileDirectoryName.LOOKS.getValue());
 		return FileUtil.saveFile(look.getImgString(), 
 								 storagePath, 
 								 String.valueOf(look.getId()), 
