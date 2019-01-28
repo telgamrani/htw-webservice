@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import htw.common.enums.LookArticleAssociationType;
 import htw.dao.model.Look;
@@ -31,8 +30,6 @@ public class LookJson implements Serializable {
 	@NotEmpty
 	@Valid
 	private List<ArticleJson> articles = new ArrayList<>();
-	
-	
 
 	public LookJson() {}
 

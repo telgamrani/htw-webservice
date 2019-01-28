@@ -9,33 +9,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import htw.dao.embedded.id.ArticleCategoryId;
+import htw.dao.embedded.id.ArticleSizeId;
 import htw.dao.model.Article;
-import htw.dao.model.Category;
+import htw.dao.model.Size;
 
 @Entity
-@Table(name = "article_category")
-public class ArticleCategory implements Serializable {
-
-	private static final long serialVersionUID = 4896785947977325222L;
+@Table(name = "article_size")
+public class ArticleSize implements Serializable {
 	
-	@EmbeddedId
-	private ArticleCategoryId id;
+	private static final long serialVersionUID = -3166726113353369373L;
 
+	@EmbeddedId
+	private ArticleSizeId id;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @MapsId("articleId")
 	private Article article;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("categoryId")
-	private Category category;
+    @MapsId("sizeId")
+	private Size size;
 
-	public ArticleCategory() {}
+	public ArticleSize() {}
 
-	public ArticleCategory(Article article, Category category) {
+	public ArticleSize(Article article, Size size) {
 		this.article = article;
-		this.category = category;
-		this.id = new ArticleCategoryId(article.getId(), category.getValue());
+		this.size = size;
+		this.id = new ArticleSizeId(article.getId(), size.getValue());
+	}
+
+	public ArticleSizeId getId() {
+		return id;
+	}
+
+	public void setId(ArticleSizeId id) {
+		this.id = id;
 	}
 
 	public Article getArticle() {
@@ -46,12 +54,12 @@ public class ArticleCategory implements Serializable {
 		this.article = article;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Size getSize() {
+		return size;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setSize(Size size) {
+		this.size = size;
 	}
 
 	@Override
@@ -59,8 +67,8 @@ public class ArticleCategory implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((article == null) ? 0 : article.hashCode());
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((size == null) ? 0 : size.hashCode());
 		return result;
 	}
 
@@ -72,23 +80,23 @@ public class ArticleCategory implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ArticleCategory other = (ArticleCategory) obj;
+		ArticleSize other = (ArticleSize) obj;
 		if (article == null) {
 			if (other.article != null)
 				return false;
 		} else if (!article.equals(other.article))
-			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (size == null) {
+			if (other.size != null)
+				return false;
+		} else if (!size.equals(other.size))
+			return false;
 		return true;
-	}	
+	}
 	
 }

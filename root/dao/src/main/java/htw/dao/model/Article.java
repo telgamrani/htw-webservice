@@ -3,6 +3,7 @@ package htw.dao.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,13 +12,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import htw.dao.model.association.ArticleCategory;
+import htw.dao.model.association.ArticleSize;
 import htw.dao.model.json.ArticleJson;
 
 @Entity
@@ -36,8 +36,10 @@ public class Article implements Serializable{
 	
 	private String brand;
 	
+	// TODO : A supprimer
 	private String imgUrl;
 	
+	// TODO : A SUPPRIMER	
 	@Lob
 	@Column(name = "imgString", columnDefinition = "LONGTEXT")
 	private String imgString;
@@ -46,32 +48,33 @@ public class Article implements Serializable{
 	
 	private String description;
 	
-//	@OneToMany(
-//        mappedBy = "article",
-//        cascade = CascadeType.ALL,
-//        orphanRemoval = true
-//    )
-//    private List<LookArticle> looksArticle = new ArrayList<>();
-	
 	@OneToMany(
 			mappedBy = "article",
 			cascade = CascadeType.PERSIST
 	)
 	private List<ArticleCategory> articleCategories = new ArrayList<>();
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "size_id")
-	private Size size;
+	@OneToMany(
+			mappedBy = "article",
+			cascade = CascadeType.PERSIST
+	)
+	private List<ArticleSize> articleSizes = new ArrayList<>();
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "color_id")
-	private Color color;
+	private String color;
 	
 	@OneToMany(
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.PERSIST
 	)
-	private List<Image> image;
+	private List<Image> images = new ArrayList<>();
+	
+// DONT REMOVE
+//	@OneToMany(
+//  	mappedBy = "article",
+//  	cascade = CascadeType.ALL,
+//  	orphanRemoval = true
+//	)
+//	private List<LookArticle> looksArticle = new ArrayList<>();	
 	
 	public Article() {}
 	
@@ -83,25 +86,27 @@ public class Article implements Serializable{
 		this.price = price;
 		this.description = description;
 	}
-	
-	public Article(Article article) {
-		this.shoppingSiteName = article.getShoppingSiteName();
-		this.shoppingUrl = article.getShoppingUrl();
-		this.brand = article.getBrand();
-		this.imgUrl = article.getImgUrl();
-		this.price = article.getPrice();
-		this.description = article.getDescription();
-	}
 
 	public ArticleJson convertToJson() {
 		ArticleJson articleJson = new ArticleJson();
 		articleJson.setId(this.getId());
+		// TODO : A SUPPRIMER
 		articleJson.setImgUrl(this.getImgUrl());
 		articleJson.setShoppingSiteName(this.getShoppingSiteName());
 		articleJson.setShoppingUrl(this.getShoppingUrl());
 		articleJson.setBrand(this.getBrand());
 		articleJson.setPrice(this.getPrice());
 		articleJson.setDescription(this.getDescription());
+		articleJson.setColor(this.getColor());
+		if(this.getImages() != null && this.getImages().size() > 0) {
+			articleJson.setImages(this.getImages().stream().map(i -> i.getPath()).collect(Collectors.toList()));
+		}
+		if(this.getCategories() != null && this.getCategories().size() > 0) {
+			articleJson.setCategories(this.getCategories().stream().map(c -> c.getValue().name()).collect(Collectors.toList()));
+		}
+		if(this.getSizes() != null && this.getSizes().size() > 0) {
+			articleJson.setSizes(this.getSizes().stream().map(s -> s.getValue()).collect(Collectors.toList()));
+		}
 		return articleJson;
 	}
 
@@ -186,14 +191,6 @@ public class Article implements Serializable{
 		this.addArticleCategory(articleCategory);
 	}
 	
-//	public List<Article> getArticles(){
-//		List<Article> articles = new ArrayList<Article>();
-//		if(this.getLookArticles() != null) {
-//			this.getLookArticles().forEach(la -> articles.add(la.getArticle()));
-//		}
-//		return articles;
-//	}
-	
 	public List<Category> getCategories() {
 		List<Category> categories = new ArrayList<Category>();
 		if(this.getArticleCategories() != null) {
@@ -202,32 +199,49 @@ public class Article implements Serializable{
 		return categories;
 	}
 
-	public Size getSize() {
-		return size;
+	public List<ArticleSize> getArticleSizes() {
+		return articleSizes;
 	}
 
-	public void setSize(Size size) {
-		this.size = size;
+	public void setArticleSizes(List<ArticleSize> articleSizes) {
+		this.articleSizes = articleSizes;
+	}
+	
+	public void addArticleSize(ArticleSize articleSize) {
+		this.articleSizes.add(articleSize);
+	}
+	
+	public void addSize(Size size) {
+		ArticleSize articleSize = new ArticleSize(this, size);
+		this.addArticleSize(articleSize);
+	}
+	
+	public List<Size> getSizes() {
+		List<Size> sizes = new ArrayList<>();
+		if(this.getArticleSizes() != null) {
+			this.getArticleSizes().forEach(as -> sizes.add(as.getSize()));
+		}
+		return sizes;
 	}
 
-	public Color getColor() {
+	public String getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(String color) {
 		this.color = color;
 	}
-
-	public List<Image> getImage() {
-		return image;
+	
+	public List<Image> getImages() {
+		return images;
 	}
 
-	public void setImage(List<Image> image) {
-		this.image = image;
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
 	
 	public void addImage(Image image) {
-		this.image.add(image);
+		this.getImages().add(image);
 	}
 
 	@Override

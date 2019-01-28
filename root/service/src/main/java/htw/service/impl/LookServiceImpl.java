@@ -71,6 +71,7 @@ public class LookServiceImpl implements LookService {
 	@Override
 	public Look saveLookAndArticlesImgUrl(Look look) {
 		
+		// TODO : A SUPPRIMER
 		// Articles
 		look.getArticles().forEach(a -> {
 			String fileArticleExtension = Base64Util.getExtension(a.getImgString());
