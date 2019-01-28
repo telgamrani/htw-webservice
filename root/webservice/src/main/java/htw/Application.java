@@ -13,9 +13,11 @@ import htw.common.enums.LookArticleAssociationType;
 import htw.dao.model.Article;
 import htw.dao.model.Category;
 import htw.dao.model.Look;
+import htw.dao.model.Size;
 import htw.service.ArticleService;
 import htw.service.CategoryService;
 import htw.service.LookService;
+import htw.service.SizeService;
 
 @SpringBootApplication
 @RestController
@@ -29,6 +31,9 @@ public class Application {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private SizeService sizeService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -48,7 +53,7 @@ public class Application {
     	
     }
     
-    @GetMapping("/testArticlecategoryAssociation")
+    @GetMapping("/testArticleCategoryAssociation")
     public void testArticlecategoryAssociation() {
     	this.categoryService.save(new Category(ArticleCategoryType.BAG));
     	Category category1 = categoryService.findById(ArticleCategoryType.BOOTS);
@@ -56,6 +61,18 @@ public class Application {
     	Article article = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", "imgUrl2", 2.0, "desc");
     	article.addCategory(category1);
     	article.addCategory(category2);
+    	articleService.save(article);
+    }
+    
+    @GetMapping("/testArticleSizeAssociation")
+    public void testArticleSizeAssociation() {
+    	this.sizeService.save(new Size("XL"));
+    	this.sizeService.save(new Size("M"));
+    	Size size1 = sizeService.findById("XL");
+    	Size size2 = sizeService.findById("M");
+    	Article article = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", "imgUrl2", 2.0, "desc");
+    	article.addSize(size1);
+    	article.addSize(size2);
     	articleService.save(article);
     }
     

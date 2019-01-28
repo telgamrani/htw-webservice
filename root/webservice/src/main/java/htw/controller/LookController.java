@@ -47,6 +47,7 @@ public class LookController {
 		lookService.saveLookAndArticlesImgUrl(look);
 		
 		lookService.saveLookImgOnDisk(look);
+		// TODO : A SUPPRIMER
 		articleService.saveArticlesImgsOnDisk(look.getArticles());
 		
 		return look.convertToJson();
@@ -87,7 +88,7 @@ public class LookController {
 		
 	}
 	
-	@GetMapping(value = "/get")
+	@GetMapping(value = "/get/all")
 	public List<LookJson> findAll(){
 		List<Look> looks = lookService.findAll();
 		List<LookJson> looksJson = new ArrayList<>();
@@ -95,7 +96,7 @@ public class LookController {
 		return looksJson;
 	}
 	
-	@GetMapping(value = "/getAllPublished/{page}/{size}")
+	@GetMapping(value = "/get/all/published/{page}/{size}")
 	public List<LookJson> findAllPublished(@PathVariable int page, @PathVariable int size){
 		List<Look> looks = lookService.findByIsPublished(true, page, size);
 		List<LookJson> looksJson = new ArrayList<>();
@@ -103,7 +104,7 @@ public class LookController {
 		return looksJson;
 	}
 	
-	@GetMapping(value = "/getAll/{page}/{size}")
+	@GetMapping(value = "/get/all/{page}/{size}")
 	public List<LookJson> findAll(@PathVariable int page, @PathVariable int size){
 		List<Look> looks = lookService.findAll(page, size);
 		List<LookJson> looksJson = new ArrayList<>();
