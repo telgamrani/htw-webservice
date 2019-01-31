@@ -1,13 +1,18 @@
-package htw.dao.model;
+package htw.robot.scraping.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import htw.dao.model.json.RobotScrapingUrlJson;
+import htw.dao.robot.scraping.model.association.RobotScrapingUrlSelector;
+import htw.robot.scraping.model.json.RobotScrapingUrlJson;
 
 @Entity
 @Table(name = "robot_scraping_url")
@@ -16,8 +21,13 @@ public class RobotScrapingUrl implements Serializable {
 	private static final long serialVersionUID = 2332163559228016906L;
 	
 	@Id
-	@Column(length = 1024)
+	@Column(length = 1000)
 	private String url;
+	
+	@OneToMany(
+		mappedBy = "robotScrapingUrl"
+	)
+	private List<RobotScrapingUrlSelector> robotScrapingUrlSelectors = new ArrayList<>();
 
 	public RobotScrapingUrl() {}
 
@@ -37,6 +47,18 @@ public class RobotScrapingUrl implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public List<RobotScrapingUrlSelector> getRobotScrapingUrlSelector() {
+		return robotScrapingUrlSelectors;
+	}
+
+	public void setRobotScrapingUrlSelector(List<RobotScrapingUrlSelector> robotScrapingUrlSelectors) {
+		this.robotScrapingUrlSelectors = robotScrapingUrlSelectors;
+	}
+	
+	public List<RobotScrapingSelector> getRobotScrapingSelectors(){
+		return this.getRobotScrapingUrlSelector().stream().map(us -> us.getRobotScrapingSelector()).collect(Collectors.toList());
 	}
 
 	@Override

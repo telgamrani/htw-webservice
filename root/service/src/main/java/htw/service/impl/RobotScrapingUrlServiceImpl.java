@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import htw.dao.model.RobotScrapingUrl;
-import htw.dao.repository.RobotScrapingUrlRepository;
+import htw.robot.scraping.model.RobotScrapingUrl;
+import htw.robot.scraping.repository.RobotScrapingUrlRepository;
 import htw.service.RobotScrapingUrlService;
 
 @Service

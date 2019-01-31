@@ -2,7 +2,7 @@ package htw.service;
 
 import java.util.List;
 
-import htw.dao.model.RobotScrapingUrl;
+import htw.robot.scraping.model.RobotScrapingUrl;
 
 
 public interface RobotScrapingUrlService {

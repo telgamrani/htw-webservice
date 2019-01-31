@@ -192,11 +192,7 @@ public class Article implements Serializable{
 	}
 	
 	public List<Category> getCategories() {
-		List<Category> categories = new ArrayList<Category>();
-		if(this.getArticleCategories() != null) {
-			this.getArticleCategories().forEach(ac -> categories.add(ac.getCategory()));
-		}
-		return categories;
+		return this.getArticleCategories().stream().map(ac -> ac.getCategory()).collect(Collectors.toList());
 	}
 
 	public List<ArticleSize> getArticleSizes() {
@@ -221,7 +217,7 @@ public class Article implements Serializable{
 		if(this.getArticleSizes() != null) {
 			this.getArticleSizes().forEach(as -> sizes.add(as.getSize()));
 		}
-		return sizes;
+		return this.getArticleSizes().stream().map(as -> as.getSize()).collect(Collectors.toList());
 	}
 
 	public String getColor() {

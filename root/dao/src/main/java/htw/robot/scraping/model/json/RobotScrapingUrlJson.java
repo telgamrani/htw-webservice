@@ -1,6 +1,6 @@
-package htw.dao.model.json;
+package htw.robot.scraping.model.json;
 
-import htw.dao.model.RobotScrapingUrl;
+import htw.robot.scraping.model.RobotScrapingUrl;
 
 public class RobotScrapingUrlJson {
 

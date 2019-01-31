@@ -3,6 +3,7 @@ package htw.dao.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -99,11 +100,7 @@ public class Look implements Serializable {
 	}
 	
 	public List<Article> getArticles(){
-		List<Article> articles = new ArrayList<Article>();
-		if(this.getLookArticles() != null) {
-			this.getLookArticles().forEach(la -> articles.add(la.getArticle()));
-		}
-		return articles;
+		return this.getLookArticles().stream().map(la -> la.getArticle()).collect(Collectors.toList());
 	}
 	
 	public void addLookArticles(LookArticle lookArticle) {

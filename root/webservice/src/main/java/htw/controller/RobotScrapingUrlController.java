@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import htw.controller.utils.RestClient;
-import htw.dao.model.RobotScrapingUrl;
-import htw.dao.model.json.RobotScrapingUrlJson;
+import htw.robot.scraping.model.RobotScrapingUrl;
+import htw.robot.scraping.model.json.RobotScrapingUrlJson;
 import htw.service.RobotScrapingUrlService;
 import htw.service.request.RobotScrapingGetResourceByUrlRequest;
 
