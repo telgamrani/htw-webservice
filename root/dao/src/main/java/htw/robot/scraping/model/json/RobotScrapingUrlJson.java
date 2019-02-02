@@ -1,10 +1,18 @@
 package htw.robot.scraping.model.json;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import htw.common.enums.ElementTarget;
+import htw.common.enums.NumberOfElements;
+import htw.robot.scraping.model.RobotScrapingSelector;
 import htw.robot.scraping.model.RobotScrapingUrl;
 
 public class RobotScrapingUrlJson {
 
 	private String url;
+	
+	private List<RobotScrapingSelectorJson> selectors = new ArrayList<>();
 
 	public RobotScrapingUrlJson() {}
 
@@ -25,6 +33,23 @@ public class RobotScrapingUrlJson {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public List<RobotScrapingSelectorJson> getSelectors() {
+		return selectors;
+	}
+
+	public void setSelectors(List<RobotScrapingSelectorJson> selectors) {
+		this.selectors = selectors;
+	}
+	
+	public void addSelector(RobotScrapingSelectorJson selectorJson, int rank, ElementTarget elementTarget, NumberOfElements numberOfElements) {
+		if(selectorJson != null) {
+			selectorJson.setRank(rank);
+			selectorJson.setElementTarget(elementTarget);
+			selectorJson.setNumberOfElements(numberOfElements);
+			this.getSelectors().add(selectorJson);
+		}
 	}
 
 	@Override

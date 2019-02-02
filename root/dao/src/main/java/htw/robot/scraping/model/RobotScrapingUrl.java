@@ -38,6 +38,12 @@ public class RobotScrapingUrl implements Serializable {
 	public RobotScrapingUrlJson convertToJson() {
 		RobotScrapingUrlJson robotScrapingUrlJson = new RobotScrapingUrlJson();
 		robotScrapingUrlJson.setUrl(this.getUrl());
+		this.getRobotScrapingUrlSelector().forEach(us -> {
+			robotScrapingUrlJson.addSelector(us.getRobotScrapingSelector().convertToJson(), 
+											 us.getRank(), 
+											 us.getElementTarget(), 
+											 us.getNumberOfElements());
+		});
 		return robotScrapingUrlJson;
 	}
 

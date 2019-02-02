@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import htw.common.enums.SelectorType;
+import htw.robot.scraping.model.json.RobotScrapingSelectorJson;
 
 @Entity
 @Table(name="robot_scraping_selector")
@@ -28,6 +29,13 @@ public class RobotScrapingSelector implements Serializable {
 	private SelectorType type;
 
 	public RobotScrapingSelector() {}
+	
+	public RobotScrapingSelectorJson convertToJson() {
+		RobotScrapingSelectorJson robotScrapingSelectorJson = new RobotScrapingSelectorJson();
+		robotScrapingSelectorJson.setSelector(this.getSelector());
+		robotScrapingSelectorJson.setType(this.getType());
+		return robotScrapingSelectorJson;
+	}
 
 	public Long getId() {
 		return id;
