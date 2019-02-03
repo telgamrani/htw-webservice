@@ -1,5 +1,6 @@
 package htw;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,12 @@ import htw.dao.model.Article;
 import htw.dao.model.Category;
 import htw.dao.model.Look;
 import htw.dao.model.Size;
+import htw.robot.scraping.model.RobotScrapingUrl;
+import htw.robot.scraping.model.json.RobotScrapingUrlJson;
 import htw.service.ArticleService;
 import htw.service.CategoryService;
 import htw.service.LookService;
+import htw.service.RobotScrapingUrlService;
 import htw.service.SizeService;
 
 @SpringBootApplication
@@ -34,6 +38,9 @@ public class Application {
 	
 	@Autowired
 	private SizeService sizeService;
+	
+	@Autowired
+	private RobotScrapingUrlService robotScrapingUrlService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -93,6 +100,18 @@ public class Application {
     	});
     	return null;
     	
+    }
+    
+    @GetMapping("/testGetAllRobotScrapingUrl")
+    public List<RobotScrapingUrlJson> testGetAllRobotScrapingUrl() {
+    	List<RobotScrapingUrl> robotScrapingUrls = robotScrapingUrlService.findAll();
+    	List<RobotScrapingUrlJson> robotScrapingUrlsJson = new ArrayList<>();
+    	if(robotScrapingUrls != null) {
+    		robotScrapingUrls.forEach(u -> {
+    			robotScrapingUrlsJson.add(u.convertToJson());
+    		});
+    	}
+    	return robotScrapingUrlsJson;
     }
     
 }

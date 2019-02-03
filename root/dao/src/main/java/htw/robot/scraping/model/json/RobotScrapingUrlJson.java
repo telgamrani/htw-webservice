@@ -43,9 +43,15 @@ public class RobotScrapingUrlJson {
 		this.selectors = selectors;
 	}
 	
-	public void addSelector(RobotScrapingSelectorJson selectorJson, int rank, ElementTarget elementTarget, NumberOfElements numberOfElements) {
+	public void addSelector(RobotScrapingSelectorJson selectorJson, 
+							int rank, 
+							String flags,
+							ElementTarget elementTarget, 
+							NumberOfElements numberOfElements
+	) {
 		if(selectorJson != null) {
 			selectorJson.setRank(rank);
+			selectorJson.setFlags(flags);
 			selectorJson.setElementTarget(elementTarget);
 			selectorJson.setNumberOfElements(numberOfElements);
 			this.getSelectors().add(selectorJson);

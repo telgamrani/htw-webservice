@@ -11,6 +11,8 @@ public class RobotScrapingSelectorJson {
 	
 	private SelectorType type;
 	
+	private String flags;
+	
 	private int rank;
 	
 	private ElementTarget elementTarget;
@@ -19,10 +21,11 @@ public class RobotScrapingSelectorJson {
 
 	public RobotScrapingSelectorJson() {}
 
-	public RobotScrapingSelectorJson(String selector, SelectorType type, int rank, ElementTarget elementTarget,
-			NumberOfElements numberOfElements) {
+	public RobotScrapingSelectorJson(String selector, SelectorType type, String flags, int rank,
+			ElementTarget elementTarget, NumberOfElements numberOfElements) {
 		this.selector = selector;
 		this.type = type;
+		this.flags = flags;
 		this.rank = rank;
 		this.elementTarget = elementTarget;
 		this.numberOfElements = numberOfElements;
@@ -42,6 +45,14 @@ public class RobotScrapingSelectorJson {
 
 	public void setType(SelectorType type) {
 		this.type = type;
+	}
+
+	public String getFlags() {
+		return flags;
+	}
+
+	public void setFlags(String flags) {
+		this.flags = flags;
 	}
 
 	public int getRank() {
@@ -73,6 +84,7 @@ public class RobotScrapingSelectorJson {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((elementTarget == null) ? 0 : elementTarget.hashCode());
+		result = prime * result + ((flags == null) ? 0 : flags.hashCode());
 		result = prime * result + ((numberOfElements == null) ? 0 : numberOfElements.hashCode());
 		result = prime * result + rank;
 		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
@@ -91,6 +103,11 @@ public class RobotScrapingSelectorJson {
 		RobotScrapingSelectorJson other = (RobotScrapingSelectorJson) obj;
 		if (elementTarget != other.elementTarget)
 			return false;
+		if (flags == null) {
+			if (other.flags != null)
+				return false;
+		} else if (!flags.equals(other.flags))
+			return false;
 		if (numberOfElements != other.numberOfElements)
 			return false;
 		if (rank != other.rank)
@@ -107,10 +124,8 @@ public class RobotScrapingSelectorJson {
 
 	@Override
 	public String toString() {
-		return "RobotScrapingSelectorJson [selector=" + selector + ", type=" + type + ", rank=" + rank
-				+ ", elementTarget=" + elementTarget + ", numberOfElements=" + numberOfElements + "]";
+		return "RobotScrapingSelectorJson [selector=" + selector + ", type=" + type + ", flags=" + flags + ", rank="
+				+ rank + ", elementTarget=" + elementTarget + ", numberOfElements=" + numberOfElements + "]";
 	}
-	
-	
 
 }

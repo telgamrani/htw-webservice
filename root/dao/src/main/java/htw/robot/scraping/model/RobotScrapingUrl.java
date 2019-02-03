@@ -41,6 +41,7 @@ public class RobotScrapingUrl implements Serializable {
 		this.getRobotScrapingUrlSelector().forEach(us -> {
 			robotScrapingUrlJson.addSelector(us.getRobotScrapingSelector().convertToJson(), 
 											 us.getRank(), 
+											 us.getFlags(),
 											 us.getElementTarget(), 
 											 us.getNumberOfElements());
 		});

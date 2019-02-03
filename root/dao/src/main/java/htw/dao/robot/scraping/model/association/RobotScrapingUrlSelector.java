@@ -31,6 +31,8 @@ public class RobotScrapingUrlSelector {
 	
 	private int rank;
 	
+	private String flags;
+	
 	@Enumerated(EnumType.STRING)
 	private ElementTarget elementTarget;
 	
@@ -77,6 +79,14 @@ public class RobotScrapingUrlSelector {
 		this.rank = rank;
 	}
 
+	public String getFlags() {
+		return flags;
+	}
+
+	public void setFlags(String flags) {
+		this.flags = flags;
+	}
+
 	public ElementTarget getElementTarget() {
 		return elementTarget;
 	}
@@ -98,6 +108,7 @@ public class RobotScrapingUrlSelector {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((elementTarget == null) ? 0 : elementTarget.hashCode());
+		result = prime * result + ((flags == null) ? 0 : flags.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((numberOfElements == null) ? 0 : numberOfElements.hashCode());
 		result = prime * result + rank;
@@ -116,6 +127,11 @@ public class RobotScrapingUrlSelector {
 			return false;
 		RobotScrapingUrlSelector other = (RobotScrapingUrlSelector) obj;
 		if (elementTarget != other.elementTarget)
+			return false;
+		if (flags == null) {
+			if (other.flags != null)
+				return false;
+		} else if (!flags.equals(other.flags))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -142,8 +158,8 @@ public class RobotScrapingUrlSelector {
 	@Override
 	public String toString() {
 		return "RobotScrapingUrlSelector [id=" + id + ", robotScrapingUrl=" + robotScrapingUrl
-				+ ", robotScrapingSelector=" + robotScrapingSelector + ", rank=" + rank + ", elementTarget="
-				+ elementTarget + ", numberOfElements=" + numberOfElements + "]";
+				+ ", robotScrapingSelector=" + robotScrapingSelector + ", rank=" + rank + ", flags=" + flags
+				+ ", elementTarget=" + elementTarget + ", numberOfElements=" + numberOfElements + "]";
 	}
 	
 }
