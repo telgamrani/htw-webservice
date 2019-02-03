@@ -11,5 +11,7 @@ public interface ArticleService {
 	
 	void saveArticlesImgsOnDisk(List<Article> articles);
 	
-	Article replaceArticleSizes(ArticleJson articleJson);
+	Article replaceArticleSizesByDbSizes(Article article);
+
+	Article replaceArticleCategoriesByDbCategories(Article article);
 }

@@ -1,5 +1,7 @@
 package htw.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,14 @@ public class CategoryServiceImpl implements CategoryService {
 		return this.categoryRepository.save(category);
 	}
 	
+	@Override
 	public Category findById(ArticleCategoryType articleCategory) {
 		return this.categoryRepository.findById(articleCategory).get();
+	}
+
+	@Override
+	public List<Category> findAll() {
+		return this.categoryRepository.findAll();
 	}
 
 }

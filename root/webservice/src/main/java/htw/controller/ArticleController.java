@@ -23,7 +23,8 @@ public class ArticleController {
 	
 	@PostMapping(value = "/add")
 	public ArticleJson add(@Valid @RequestBody AddArticleRequest addArticleRequest, HttpServletRequest request) {
-		 Article article = this.articleService.replaceArticleSizes(addArticleRequest.getArticle());
+		 Article article = this.articleService.replaceArticleSizesByDbSizes(addArticleRequest.getArticle().convertToDao());
+		 article = this.articleService.replaceArticleCategoriesByDbCategories(article);
 		 return articleService.save(article).convertToJson();
 	}
 }
