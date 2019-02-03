@@ -44,7 +44,7 @@ public class RobotScrapingUrlSelector {
 	public RobotScrapingUrlSelector(RobotScrapingUrl robotScrapingUrl, RobotScrapingSelector robotScrapingSelector) {
 		this.robotScrapingUrl = robotScrapingUrl;
 		this.robotScrapingSelector = robotScrapingSelector;
-		this.id = new RobotScrapingUrlSelectorId(robotScrapingUrl.getUrl(), robotScrapingSelector.getId());
+		this.id = new RobotScrapingUrlSelectorId(robotScrapingUrl.getId(), robotScrapingSelector.getId());
 	}
 
 	public RobotScrapingUrlSelectorId getId() {

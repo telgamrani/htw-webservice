@@ -5,6 +5,7 @@ import java.util.List;
 
 import htw.common.enums.ElementTarget;
 import htw.common.enums.NumberOfElements;
+import htw.dao.model.json.CategoryJson;
 import htw.robot.scraping.model.RobotScrapingSelector;
 import htw.robot.scraping.model.RobotScrapingUrl;
 
@@ -13,6 +14,8 @@ public class RobotScrapingUrlJson {
 	private String url;
 	
 	private List<RobotScrapingSelectorJson> selectors = new ArrayList<>();
+	
+	private List<CategoryJson> categories = new ArrayList<>();
 
 	public RobotScrapingUrlJson() {}
 
@@ -56,6 +59,18 @@ public class RobotScrapingUrlJson {
 			selectorJson.setNumberOfElements(numberOfElements);
 			this.getSelectors().add(selectorJson);
 		}
+	}
+	
+	public List<CategoryJson> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<CategoryJson> categories) {
+		this.categories = categories;
+	}
+
+	public void addCategory(CategoryJson categoryJson) {
+		this.getCategories().add(categoryJson);
 	}
 
 	@Override

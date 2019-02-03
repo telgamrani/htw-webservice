@@ -11,24 +11,24 @@ public class RobotScrapingUrlSelectorId implements Serializable{
 	private static final long serialVersionUID = -2289277889605986500L;
 	
 	@Column(name = "url_id", length = 1000)
-	private String urlId;
+	private Long urlId;
 	
 	@Column(name = "selector_id")
 	private Long selectorId;
 
 	public RobotScrapingUrlSelectorId() {}
 
-	public RobotScrapingUrlSelectorId(String urlId, Long selectorId) {
+	public RobotScrapingUrlSelectorId(Long urlId, Long selectorId) {
 		super();
 		this.urlId = urlId;
 		this.selectorId = selectorId;
 	}
 
-	public String getUrlId() {
+	public Long getUrlId() {
 		return urlId;
 	}
 
-	public void setUrlId(String urlId) {
+	public void setUrlId(Long urlId) {
 		this.urlId = urlId;
 	}
 

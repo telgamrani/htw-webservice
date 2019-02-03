@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import htw.common.enums.ArticleCategoryType;
+import htw.dao.model.json.CategoryJson;
 
 @Entity
 @Table(name = "category")
@@ -24,6 +25,12 @@ public class Category implements Serializable {
 
 	public Category(ArticleCategoryType value) {
 		this.value = value;
+	}
+	
+	public CategoryJson convertToJson( ) {
+		CategoryJson categoryJson = new CategoryJson();
+		categoryJson.setCategory(this.getValue());
+		return categoryJson;
 	}
 
 	public ArticleCategoryType getValue() {
@@ -54,6 +61,11 @@ public class Category implements Serializable {
 		if (value != other.value)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [value=" + value + "]";
 	}
 	
 }
