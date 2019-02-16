@@ -34,9 +34,6 @@ public class LookController {
 	@Autowired
 	private LookService lookService;
 	
-	@Autowired
-	private ArticleService articleService;
-	
 	@PostMapping(value = "/add")
 	public LookJson add(@Valid @RequestBody AddLookRequest addLookRequest, HttpServletRequest request) {
 		
@@ -48,7 +45,7 @@ public class LookController {
 		
 		lookService.saveLookImgOnDisk(look);
 		// TODO : A SUPPRIMER
-		articleService.saveArticlesImgsOnDisk(look.getArticles());
+//		articleService.saveArticlesImgsOnDisk(look.getArticles());
 		
 		return look.convertToJson();
 	}

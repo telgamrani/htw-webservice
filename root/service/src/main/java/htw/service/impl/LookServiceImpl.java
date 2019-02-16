@@ -73,10 +73,10 @@ public class LookServiceImpl implements LookService {
 		
 		// TODO : A SUPPRIMER
 		// Articles
-		look.getArticles().forEach(a -> {
-			String fileArticleExtension = Base64Util.getExtension(a.getImgString());
-			a.setImgUrl(String.valueOf(a.getId()+"."+fileArticleExtension));
-		});
+//		look.getArticles().forEach(a -> {
+//			String fileArticleExtension = Base64Util.getExtension(a.getImgString());
+//			a.setImgUrl(String.valueOf(a.getId()+"."+fileArticleExtension));
+//		});
 		
 		// Look
 		String fileLookExtension = Base64Util.getExtension(look.getImgString());
