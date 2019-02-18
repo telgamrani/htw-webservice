@@ -2,6 +2,7 @@ package htw.dao.model.association;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,7 +30,10 @@ public class LookArticle implements Serializable {
     @MapsId("lookId")
 	private Look look;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(
+				fetch = FetchType.LAZY, 
+				cascade = CascadeType.MERGE
+			  )
     @MapsId("articleId")
 	private Article article;
 	

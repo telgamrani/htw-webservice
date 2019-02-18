@@ -21,8 +21,8 @@ public class ArticleJson {
 	@NotEmpty
 	private String shoppingUrl;
 	
-	// TODO : A SUPPRIMER
-	private String imgUrl;
+	
+	private int indexImagePrincipal;
 	
 	// TODO : A SUPPRIMER
 	private String imgString;
@@ -57,6 +57,7 @@ public class ArticleJson {
 		article.setPrice(this.getPrice());
 		article.setDescription(this.getDescription());
 		article.setColor(this.getColor());
+		article.setIndexImagePrincipal(this.getIndexImagePrincipal());
 		if(this.getImages() != null && this.getImages().size() > 0) {
 			this.getImages().forEach(i -> {
 				article.addImage(new Image(i));
@@ -104,14 +105,12 @@ public class ArticleJson {
 		this.shoppingUrl = shoppingUrl;
 	}
 
-
-	public String getImgUrl() {
-		return imgUrl;
+	public int getIndexImagePrincipal() {
+		return indexImagePrincipal;
 	}
 
-
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setIndexImagePrincipal(int indexImagePrincipal) {
+		this.indexImagePrincipal = indexImagePrincipal;
 	}
 
 	public String getImgString() {
@@ -205,13 +204,12 @@ public class ArticleJson {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((images == null) ? 0 : images.hashCode());
 		result = prime * result + ((imgString == null) ? 0 : imgString.hashCode());
-		result = prime * result + ((imgUrl == null) ? 0 : imgUrl.hashCode());
+		result = prime * result + indexImagePrincipal;
 		result = prime * result + ((lookArticleAssociationType == null) ? 0 : lookArticleAssociationType.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + rank;
 		result = prime * result + ((shoppingSiteName == null) ? 0 : shoppingSiteName.hashCode());
 		result = prime * result + ((shoppingUrl == null) ? 0 : shoppingUrl.hashCode());
-		result = prime * result + ((sizes == null) ? 0 : sizes.hashCode());
 		return result;
 	}
 
@@ -254,10 +252,7 @@ public class ArticleJson {
 				return false;
 		} else if (!imgString.equals(other.imgString))
 			return false;
-		if (imgUrl == null) {
-			if (other.imgUrl != null)
-				return false;
-		} else if (!imgUrl.equals(other.imgUrl))
+		if (indexImagePrincipal != other.indexImagePrincipal)
 			return false;
 		if (lookArticleAssociationType != other.lookArticleAssociationType)
 			return false;
@@ -278,20 +273,16 @@ public class ArticleJson {
 				return false;
 		} else if (!shoppingUrl.equals(other.shoppingUrl))
 			return false;
-		if (sizes == null) {
-			if (other.sizes != null)
-				return false;
-		} else if (!sizes.equals(other.sizes))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "ArticleJson [id=" + id + ", shoppingSiteName=" + shoppingSiteName + ", shoppingUrl=" + shoppingUrl
-				+ ", imgUrl=" + imgUrl + ", imgString=" + imgString + ", brand=" + brand + ", price=" + price
-				+ ", description=" + description + ", lookArticleAssociationType=" + lookArticleAssociationType
-				+ ", rank=" + rank + ", sizes=" + sizes + ", color=" + color + ", images=" + images + "]";
+				+ ", indexImagePrincipal=" + indexImagePrincipal + ", imgString=" + imgString + ", brand=" + brand
+				+ ", price=" + price + ", description=" + description + ", lookArticleAssociationType="
+				+ lookArticleAssociationType + ", rank=" + rank + ", sizes=" + sizes + ", color=" + color + ", images="
+				+ images + ", categories=" + categories + "]";
 	}
 
 	
