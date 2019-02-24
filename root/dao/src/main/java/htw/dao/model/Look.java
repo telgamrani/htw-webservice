@@ -39,7 +39,7 @@ public class Look implements Serializable {
 	
 	@OneToMany(
 	  mappedBy = "look", 
-	  cascade = CascadeType.ALL, 
+			  cascade = CascadeType.MERGE,
 	  orphanRemoval = true
 	)
 	private List<LookArticle> lookArticles = new ArrayList<>();

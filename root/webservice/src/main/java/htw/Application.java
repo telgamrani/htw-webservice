@@ -50,8 +50,8 @@ public class Application {
     public void testLookArticleAssociation() {
     	
     	System.out.println("start");
-    	Article article1 = new Article("shoppingSiteName1", "shoppingUrl1", "brand1", "imgUrl1", 1.0, "desc");
-    	Article article2 = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", "imgUrl2", 2.0, "desc");
+    	Article article1 = new Article("shoppingSiteName1", "shoppingUrl1", "brand1", 0, 1.0, "desc");
+    	Article article2 = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", 0, 2.0, "desc");
     	Look look = new Look("lookImgUrl");
     	look.addArticle(article1, LookArticleAssociationType.PRINCIPAL, 1);
     	look.addArticle(article2, LookArticleAssociationType.SECONDARY, 1);
@@ -65,7 +65,7 @@ public class Application {
     	this.categoryService.save(new Category(ArticleCategoryType.BAG));
     	Category category1 = categoryService.findById(ArticleCategoryType.BOOTS);
     	Category category2 = categoryService.findById(ArticleCategoryType.SHIRT);
-    	Article article = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", "imgUrl2", 2.0, "desc");
+    	Article article = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", 0, 2.0, "desc");
     	article.addCategory(category1);
     	article.addCategory(category2);
     	articleService.save(article);
@@ -77,7 +77,7 @@ public class Application {
     	this.sizeService.save(new Size("M"));
     	Size size1 = sizeService.findById("XL");
     	Size size2 = sizeService.findById("M");
-    	Article article = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", "imgUrl2", 2.0, "desc");
+    	Article article = new Article("shoppingSiteName2", "shoppingUrl2", "brand2", 0, 2.0, "desc");
     	article.addSize(size1);
     	article.addSize(size2);
     	articleService.save(article);

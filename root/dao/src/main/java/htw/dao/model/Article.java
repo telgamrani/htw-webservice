@@ -36,8 +36,7 @@ public class Article implements Serializable{
 	
 	private String brand;
 	
-	// TODO : A supprimer
-	private String imgUrl;
+	private int indexImagePrincipal;
 	
 	// TODO : A SUPPRIMER	
 	@Lob
@@ -78,11 +77,11 @@ public class Article implements Serializable{
 	
 	public Article() {}
 	
-	public Article(String shoppingSiteName, String shoppingUrl, String brand, String imgUrl, Double price, String description) {
+	public Article(String shoppingSiteName, String shoppingUrl, String brand, int indexImagePrincipal, Double price, String description) {
 		this.shoppingSiteName = shoppingSiteName;
 		this.shoppingUrl = shoppingUrl;
 		this.brand = brand;
-		this.imgUrl = imgUrl;
+		this.indexImagePrincipal = indexImagePrincipal;
 		this.price = price;
 		this.description = description;
 	}
@@ -90,8 +89,7 @@ public class Article implements Serializable{
 	public ArticleJson convertToJson() {
 		ArticleJson articleJson = new ArticleJson();
 		articleJson.setId(this.getId());
-		// TODO : A SUPPRIMER
-		articleJson.setImgUrl(this.getImgUrl());
+		articleJson.setIndexImagePrincipal(this.getIndexImagePrincipal());
 		articleJson.setShoppingSiteName(this.getShoppingSiteName());
 		articleJson.setShoppingUrl(this.getShoppingUrl());
 		articleJson.setBrand(this.getBrand());
@@ -142,12 +140,12 @@ public class Article implements Serializable{
 		this.brand = brand;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
+	public int getIndexImagePrincipal() {
+		return indexImagePrincipal;
 	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setIndexImagePrincipal(int indexImagePrincipal) {
+		this.indexImagePrincipal = indexImagePrincipal;
 	}
 
 	public String getImgString() {
@@ -244,8 +242,13 @@ public class Article implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((imgUrl == null) ? 0 : imgUrl.hashCode());
+		result = prime * result + ((images == null) ? 0 : images.hashCode());
+		result = prime * result + ((imgString == null) ? 0 : imgString.hashCode());
+		result = prime * result + indexImagePrincipal;
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((shoppingSiteName == null) ? 0 : shoppingSiteName.hashCode());
 		result = prime * result + ((shoppingUrl == null) ? 0 : shoppingUrl.hashCode());
@@ -261,15 +264,37 @@ public class Article implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Article other = (Article) obj;
+		if (brand == null) {
+			if (other.brand != null)
+				return false;
+		} else if (!brand.equals(other.brand))
+			return false;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (imgUrl == null) {
-			if (other.imgUrl != null)
+		if (images == null) {
+			if (other.images != null)
 				return false;
-		} else if (!imgUrl.equals(other.imgUrl))
+		} else if (!images.equals(other.images))
+			return false;
+		if (imgString == null) {
+			if (other.imgString != null)
+				return false;
+		} else if (!imgString.equals(other.imgString))
+			return false;
+		if (indexImagePrincipal != other.indexImagePrincipal)
 			return false;
 		if (price == null) {
 			if (other.price != null)
@@ -292,9 +317,9 @@ public class Article implements Serializable{
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", shoppingSiteName=" + shoppingSiteName + ", shoppingUrl=" + shoppingUrl
-				+ ", imgUrl=" + imgUrl + ", price=" + price + "]";
+				+ ", brand=" + brand + ", indexImagePrincipal=" + indexImagePrincipal + ", imgString=" + imgString
+				+ ", price=" + price + ", description=" + description + ", articleCategories=" + articleCategories
+				+ ", articleSizes=" + articleSizes + ", color=" + color + ", images=" + images + "]";
 	}
-	
-	
 	
 }
